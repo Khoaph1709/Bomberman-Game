@@ -14,4 +14,35 @@ public abstract class Enemy extends Entity {
     public Enemy(int x, int y, Image img) {
         super(x, y, img);
     }
+
+    protected void gotHurt(Sprite sprite) {
+        hurt_time++;
+        if (hurt_time == 1) {
+            Sound.died.play();
+        }
+        img = sprite.getFxImage();
+        if (hurt_time == 20) {
+            hurt_time = 0;
+            hurt = false;
+            if (life == 0) {
+                Platform.runLater(() -> {
+                    enemies.remove(this);
+                    x = getTileX();
+                    y = getTileY();
+                    BombermanGame.table[getTileX()][getTileY()] = null;
+                });
+            }
+        }
+        this.sprite = Sprite.movingSprite(sprite, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animate, 20);
+        img = sprite.getFxImage();
+        
+        // if (animate == 60) {
+        //     Platform.runLater(() -> {
+        //         enemies.remove(this);
+        //         x = getTileX();
+        //         y = getTileY();
+        //         BombermanGame.table[x][y] = null;
+        //     });
+        // }
+    }
 }
