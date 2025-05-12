@@ -1,11 +1,20 @@
 package uet.oop.bomberman.entities.character.enemy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import static uet.oop.bomberman.BombermanGame.enemies;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.tile.Brick;
+import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.sound.Sound;
+
+
 
 public abstract class Enemy extends Entity {
     // protected Entity old_cur = null;
