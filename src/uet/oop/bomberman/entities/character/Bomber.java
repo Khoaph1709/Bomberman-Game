@@ -420,4 +420,12 @@ public class Bomber extends Entity {
     public boolean isProtectded() {
         return invincibleTimer > 0;
     }
+
+    public void setTileX(int tileX) {
+        this.x = tileX *  Sprite.SCALED_SIZE;
+    }
+
+    public void setTileY(int tileY) {
+        this.y = tileY *  Sprite.SCALED_SIZE;
+    }
 }

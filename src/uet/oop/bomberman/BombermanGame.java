@@ -37,7 +37,7 @@ public class BombermanGame extends Application {
     
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    private static final int INIT_LEVEL = 1;
+    private static final int INIT_LEVEL = 0;
     private static final int MAX_LEVEL = 5;
     public static long FPS_GAME = 1000 / 60;
     public static int level = INIT_LEVEL;
@@ -101,6 +101,9 @@ public class BombermanGame extends Application {
             System.out.println("Loaded " + stillObjects.size() + " static objects");
             System.out.println("Loaded " + entities.size() + " entities");
             System.out.println("Loaded " + enemies.size() + " enemies");
+
+            gameBomber.setTileX(1);
+            gameBomber.setTileY(1);
         } catch (Exception e) {
             System.err.println("Error loading level:");
             e.printStackTrace();
@@ -116,7 +119,7 @@ public class BombermanGame extends Application {
     public void render(Stage stage) {
         switch (gameState) {
             case SINGLEPLAYER:
-                Bomber bomber = null;
+                Bomber bomber = new  Bomber(1, 1, Sprite.player_down.getFxImage(), null);
                 for (Entity entity : entities) {
                     if (entity instanceof Bomber) {
                         bomber = (Bomber) entity;
