@@ -68,18 +68,12 @@ public class BombermanGame extends Application {
     public static Entity[][] hiddenTable;
     public static STATE gameState = STATE.MENU;
 
+    private int playerLives = gameBomber.getBlood();
+    private int score = 0;
+
     @Override
     public void start(Stage stage) {
-        if (mainTimer != null) {
-            mainTimer.stop();
-            mainTimer = null;
-        }
-
         gameBomber = new Bomber(1, 1, Sprite.player_down.getFxImage(), null);
-        gameState = STATE.MENU;
-        newGame = true;
-        isEnd = false;
-
         mainTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -142,7 +136,6 @@ public class BombermanGame extends Application {
             case NEXT_LEVEL:
                 if (level < MAX_LEVEL) {
                     music.stop();
-                    Sound.win.play();
                     gameBomber.resetStats();
                     gameState = STATE.SINGLEPLAYER;
                     level++;
@@ -153,8 +146,6 @@ public class BombermanGame extends Application {
                     stage.show();
                     createMap();
                 } else if (!isEnd) {
-                    music.stop();
-                    Sound.youWin.play();
                     end(stage);
                     isEnd = true;
                 }
@@ -248,7 +239,7 @@ public class BombermanGame extends Application {
         button.setStyle("-fx-background-color: transparent; ");
         button.setPrefSize(166, 66);
         if (gameState == STATE.NEXT_LEVEL) {
-            music = Sound.youWin;
+            music = Sound.win;
             music.play();
             try {
                 stream = new FileInputStream("res/button_menu/youwin.png");
@@ -275,15 +266,8 @@ public class BombermanGame extends Application {
         button.setOnMouseEntered(e -> button.setEffect(shadow));
         button.setOnMouseExited(e -> button.setEffect(null));
         button.setOnAction(event -> {
-            if (gameTimer != null) {
-                gameTimer.stop();
-            }
-            if (mainTimer != null) {
-                mainTimer.stop();
-            }
             if (gameState == STATE.NEXT_LEVEL) {
                 gameState = STATE.SINGLEPLAYER;
-                newGame = true;
             } else if (gameState == STATE.END) {
                 resetGame();
                 gameState = STATE.MENU;
@@ -292,9 +276,7 @@ public class BombermanGame extends Application {
             }
             isEnd = false;
             stage.close();
-            Stage newStage = new Stage();
-            start(newStage);
-//            mainTimer.start();
+            mainTimer.start();
         });
         Group newRoot = new Group();
         try {
@@ -329,7 +311,6 @@ public class BombermanGame extends Application {
         gameBomber.bombQuantity = 1;
         Bomb.cnt = 0;
         gameBomber.setKeyListener(null);
-        newGame = true;
     }
 
     public void menu(Stage stage) {
