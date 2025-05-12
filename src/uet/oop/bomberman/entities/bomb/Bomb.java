@@ -90,7 +90,7 @@ public class Bomb extends Entity {
         if (cur instanceof Bomb && !((Bomb) cur).isExploded()) {
             ((Bomb) cur).setExpload();
         }
-        if (BombermanGame.getBomber().getTileX() == i && BombermanGame.getBomber().getTileY() == j && BombermanGame.getBomber().isFlamePass() && !BombermanGame.getBomber().isProtectded()) {
+        if (BombermanGame.getBomber().getTileX() == i && BombermanGame.getBomber().getTileY() == j && !BombermanGame.getBomber().isFlamePass() && !BombermanGame.getBomber().isProtectded()) {
             BombermanGame.getBomber().setHurt();
         }
     }
