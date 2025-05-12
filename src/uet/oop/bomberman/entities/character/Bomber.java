@@ -28,8 +28,8 @@ public class Bomber extends Entity {
     public boolean AI = false;
     
     public static int bomberLife;
-    private int STEP = Sprite.STEP;
-    private int blood = 4;
+    private int STEP = Sprite.STEP * speed;
+    private int blood = 2;
     
     // Movement related variables
     private KeyListener keyListener;
@@ -56,6 +56,7 @@ public class Bomber extends Entity {
      * Place a bomb at the current position of the bomber.
      */
     public void placeBomb() {
+        // Đảm bảo Bomb.cnt được reset khi game reset
         if (Bomb.cnt < bombQuantity && !(table[getTileX()][getTileY()] instanceof Bomb) && !(table[getTileX()][getTileY()] instanceof Brick)) {
             Platform.runLater(() -> {
                 Entity object = new Bomb(getTileX(), getTileY(), Sprite.bomb.getFxImage(), entities, bombSize);
@@ -137,7 +138,7 @@ public class Bomber extends Entity {
             ((FlameItem) table[px][py]).pick();
         } else if (table[px][py] instanceof SpeedItem) {
             if (!((SpeedItem) table[px][py]).isPickUp()) {
-                speed++;
+                STEP *= 2;
             }
             ((SpeedItem) table[px][py]).pick();
         } else if (table[px][py] instanceof BombItem) {
@@ -160,6 +161,10 @@ public class Bomber extends Entity {
             }
             ((WallPassItem) table[px][py]).pick();
         }
+    }
+
+    public void revertSTEP() {
+        STEP = 1;
     }
 
     @Override

@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import uet.oop.bomberman.BombermanGame.STATE;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.gui.GameGUI;
@@ -37,7 +38,7 @@ public class BombermanGame extends Application {
     
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    private static final int INIT_LEVEL = 0;
+    private static final int INIT_LEVEL = 1;
     private static final int MAX_LEVEL = 5;
     public static long FPS_GAME = 1000 / 60;
     public static int level = INIT_LEVEL;
@@ -165,6 +166,8 @@ public class BombermanGame extends Application {
         }
         gameGUI = new GameGUI();
         gameGUI.setupStage(stage, WIDTH, HEIGHT);
+        KeyListener keyListener = new KeyListener(stage.getScene());
+        gameBomber.setKeyListener(keyListener);
         gc = gameGUI.getGraphicsContext();
         stage.show();
 
@@ -299,10 +302,13 @@ public class BombermanGame extends Application {
         stillObjects.clear();
         enemies.clear();
         gameBomber = new Bomber(1, 1, Sprite.player_down.getFxImage(), null);
+        entities.add(gameBomber);
         MAXSCORE = 0;
         isEnd = false;
         level = INIT_LEVEL;
         gameBomber.bombQuantity = 1;
+        Bomb.cnt = 0;
+        gameBomber.setKeyListener(null);
     }
 
     public void menu(Stage stage) {

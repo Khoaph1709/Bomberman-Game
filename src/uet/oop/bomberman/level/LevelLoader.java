@@ -16,11 +16,7 @@ import uet.oop.bomberman.entities.character.enemy.Doll;
 import uet.oop.bomberman.entities.character.enemy.Doria;
 import uet.oop.bomberman.entities.character.enemy.Minvo;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
-import uet.oop.bomberman.entities.items.BombItem;
-import uet.oop.bomberman.entities.items.FlameItem;
-import uet.oop.bomberman.entities.items.Portal;
-import uet.oop.bomberman.entities.items.SpeedItem;
-import uet.oop.bomberman.entities.items.WallPassItem;
+import uet.oop.bomberman.entities.items.*;
 import uet.oop.bomberman.entities.tile.Brick;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Wall;
@@ -164,18 +160,18 @@ public class LevelLoader {
                 hiddenTable[x][y] = bombItem;
                 break;
             case 'f': // FlameItem
-                Entity speedItem = new SpeedItem(x, y, Sprite.powerup_speed.getFxImage());
-                stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
-                entities.add(new Brick(x, y, Sprite.brick.getFxImage()));
-                table[x][y] = new Brick(x, y, Sprite.brick.getFxImage());
-                hiddenTable[x][y] = speedItem;
-                break;
-            case 's': // SpeedItem
                 Entity flameItem = new FlameItem(x, y, Sprite.powerup_flames.getFxImage());
                 stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 entities.add(new Brick(x, y, Sprite.brick.getFxImage()));
                 table[x][y] = new Brick(x, y, Sprite.brick.getFxImage());
                 hiddenTable[x][y] = flameItem;
+                break;
+            case 's': // SpeedItem
+                Entity speedItem = new SpeedItem(x, y, Sprite.powerup_speed.getFxImage());
+                stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
+                entities.add(new Brick(x, y, Sprite.brick.getFxImage()));
+                table[x][y] = new Brick(x, y, Sprite.brick.getFxImage());
+                hiddenTable[x][y] = speedItem;
                 break;
             case 'x': // Portal
                 Entity portal = new Portal(x, y, Sprite.portal.getFxImage());
@@ -185,7 +181,7 @@ public class LevelLoader {
                 hiddenTable[x][y] = portal;
                 break;
             case 'a':
-                Entity flamePass = new FlameItem(x, y, Sprite.powerup_flamepass.getFxImage());
+                Entity flamePass = new FlamePassItem(x, y, Sprite.powerup_flamepass.getFxImage());
                 stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 entities.add(new Brick(x, y, Sprite.brick.getFxImage()));
                 table[x][y] = new Brick(x, y, Sprite.brick.getFxImage());
