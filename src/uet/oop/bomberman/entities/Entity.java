@@ -23,7 +23,7 @@ public abstract class Entity {
     protected int animate = 0;
 
     protected int life = 1;
-
+    
     protected boolean died = false;
 
     protected boolean hurt = false;
@@ -61,7 +61,7 @@ public abstract class Entity {
         x /= Sprite.SCALED_SIZE;
         y /= Sprite.SCALED_SIZE;
         Entity entity = getEntity(x, y);
-
+        
         return !(entity instanceof Wall) && !(entity instanceof Brick) && !(entity instanceof Bomb);
     }
 

@@ -7,10 +7,8 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
-
 import static uet.oop.bomberman.BombermanGame.enemies;
 import static uet.oop.bomberman.BombermanGame.table;
-
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.items.Item;
@@ -21,7 +19,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.sound.Sound;
 
 public class Bomb extends Entity {
-    private final int timeToExplode = 120; // 2 seconds (60 frames/second)
+    private int timeToExplode = 120; // 2 seconds (60 frames/second)
     public static int cnt = 0;
     private final int size;
     private final List<Entity> entities;
@@ -85,7 +83,7 @@ public class Bomb extends Entity {
                 }
             }
         }
-
+        
         if (cur instanceof Item) {
             cur.setDied();
         }
@@ -111,80 +109,80 @@ public class Bomb extends Entity {
             exploded = true;
             Sound.explosion.play();
             Platform.runLater(
-                    () -> {
-                        for (int c = 1; c <= size; c++) {
-                            int i = x / Sprite.SCALED_SIZE - c, j = y / Sprite.SCALED_SIZE;
-                            if (checkBreak(i, j)) {
-                                break;
-                            }
-                            if (c < size) {
-                                entities.add(new Flame(i, j, null, Direction.OH, entities));
-                            } else {
-                                entities.add(new Flame(i, j, null, Direction.L, entities));
-                            }
+                () -> {
+                    for (int c = 1; c <= size; c++) {
+                        int i = x / Sprite.SCALED_SIZE - c, j = y / Sprite.SCALED_SIZE;
+                        if (checkBreak(i, j)) {
+                            break;
                         }
-                        for (int c = 1; c <= size; c++) {
-                            int i = x / Sprite.SCALED_SIZE + c, j = y / Sprite.SCALED_SIZE;
-                            if (checkBreak(i, j)) break;
-                            if (c < size) {
-                                entities.add(new Flame(i, j, Sprite.explosion_horizontal.getFxImage(), Direction.OH, entities));
-                            } else {
-                                entities.add(new Flame(i, j, Sprite.explosion_horizontal_right_last.getFxImage(), Direction.R, entities));
-                            }
+                        if (c < size) {
+                            entities.add(new Flame(i, j, null, Direction.OH, entities));
+                        } else {
+                            entities.add(new Flame(i, j, null, Direction.L, entities));
                         }
-                        for (int c = 1; c <= size; c++) {
-                            int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE - c;
+                    }
+                    for (int c = 1; c <= size; c++) {
+                        int i = x / Sprite.SCALED_SIZE + c, j = y / Sprite.SCALED_SIZE;
+                        if (checkBreak(i, j)) break;
+                        if (c < size) {
+                            entities.add(new Flame(i, j, Sprite.explosion_horizontal.getFxImage(), Direction.OH, entities));
+                        } else {
+                            entities.add(new Flame(i, j, Sprite.explosion_horizontal_right_last.getFxImage(), Direction.R, entities));
+                        }
+                    }
+                    for (int c = 1; c <= size; c++) {
+                        int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE - c;
                             if (checkBreak(i, j)) break;
                             if (c < size) {
                                 entities.add(new Flame(i, j, Sprite.explosion_vertical.getFxImage(), Direction.OV, entities));
                             } else {
                                 entities.add(new Flame(i, j, Sprite.explosion_vertical_top_last.getFxImage(), Direction.U, entities));
                             }
-                        }
-                        for (int c = 1; c <= size; c++) {
-                            int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE + c;
-                            if (checkBreak(i, j)) break;
-                            if (c < size) {
-                                entities.add(new Flame(i, j, Sprite.explosion_vertical.getFxImage(), Direction.OV, entities));
-                            } else {
-                                entities.add(new Flame(i, j, Sprite.explosion_vertical_down_last.getFxImage(), Direction.D, entities));
-                            }
-                        }
-                        Timer bombTimer = new Timer();
-                        bombTimer.schedule(new TimerTask() {
-                            public void run() {
-                                for (int c = 0; c <= size; c++) {
-                                    int i = x / Sprite.SCALED_SIZE - c, j = y / Sprite.SCALED_SIZE;
-                                    if (checkBreak(i, j)) break;
-                                    setDied(i, j);
-                                }
-                                for (int c = 1; c <= size; c++) {
-                                    int i = x / Sprite.SCALED_SIZE + c, j = y / Sprite.SCALED_SIZE;
-                                    if (checkBreak(i, j)) break;
-                                    setDied(i, j);
-                                }
-                                for (int c = 1; c <= size; c++) {
-                                    int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE - c;
-                                    if (checkBreak(i, j)) break;
-                                    setDied(i, j);
-                                }
-                                for (int c = 1; c <= size; c++) {
-                                    int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE + c;
-                                    if (checkBreak(i, j)) break;
-                                    setDied(i, j);
-                                }
-                            }
-                        }, timeToExplode);
                     }
+                    for (int c = 1; c <= size; c++) {
+                        int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE + c;
+                        if (checkBreak(i, j)) break;
+                        if (c < size) {
+                            entities.add(new Flame(i, j, Sprite.explosion_vertical.getFxImage(), Direction.OV, entities));
+                        } else {
+                            entities.add(new Flame(i, j, Sprite.explosion_vertical_down_last.getFxImage(), Direction.D, entities));
+                        }
+                    }
+                    Timer bombTimer = new Timer();
+                    bombTimer.schedule(new TimerTask() {
+                        public void run() {
+                            for (int c = 0; c <= size; c++) {
+                                int i = x / Sprite.SCALED_SIZE - c, j = y / Sprite.SCALED_SIZE;
+                                if (checkBreak(i, j)) break;
+                                setDied(i, j);
+                            }
+                            for (int c = 1; c <= size; c++) {
+                                int i = x / Sprite.SCALED_SIZE + c, j = y / Sprite.SCALED_SIZE;
+                                if (checkBreak(i, j)) break;
+                                setDied(i, j);
+                            }
+                            for (int c = 1; c <= size; c++) {
+                                int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE - c;
+                                if (checkBreak(i, j)) break;
+                                setDied(i, j);
+                            }
+                            for (int c = 1; c <= size; c++) {
+                                int i = x / Sprite.SCALED_SIZE, j = y / Sprite.SCALED_SIZE + c;
+                                if (checkBreak(i, j)) break;
+                                setDied(i, j);
+                            }
+                        }
+                    }, timeToExplode);
+                }
             );
         }
         if (animate == 80) {
             Platform.runLater(
-                    () -> {
-                        table[px][py] = portalPos;
-                        cnt--;
-                        entities.remove(this);
-                    }
+                () -> {
+                    table[px][py] = portalPos;
+                    cnt--;
+                    entities.remove(this);
+                }
             );
         }
         if (animate > 7500) {

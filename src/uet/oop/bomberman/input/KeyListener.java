@@ -30,7 +30,7 @@ public class KeyListener implements EventHandler<KeyEvent> {
      * Scene đóng vai trò là root container trong JavaFX, giúp theo dõi sự kiện bàn phím
      * trên toàn bộ khu vực hiển thị của ứng dụng. Khi được gắn vào Scene,
      * listener sẽ nhận được mọi sự kiện phát sinh từ vùng hiển thị này.
-     *
+     * 
      * @param scene Đối tượng Scene từ JavaFX để lắng nghe sự kiện
      */
     public KeyListener(Scene scene) {
@@ -43,7 +43,7 @@ public class KeyListener implements EventHandler<KeyEvent> {
      * <p>
      * Scene sẽ chuyển tiếp các sự kiện bàn phím từ hệ điều hành tới phương thức này,
      * cho phép theo dõi trạng thái phím theo thời gian thực.
-     *
+     * 
      * @param event Sự kiện bàn phím từ JavaFX Scene
      */
     @Override
@@ -57,7 +57,7 @@ public class KeyListener implements EventHandler<KeyEvent> {
 
     /**
      * Kiểm tra xem một phím cụ thể có đang được nhấn hay không.
-     *
+     * 
      * @param keyCode Mã phím cần kiểm tra
      * @return true nếu phím đang được nhấn, ngược lại trả về false
      */

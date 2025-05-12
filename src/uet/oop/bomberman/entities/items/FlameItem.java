@@ -3,10 +3,9 @@ package uet.oop.bomberman.entities.items;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
-
 import static uet.oop.bomberman.BombermanGame.table;
-
 import uet.oop.bomberman.graphics.Sprite;
+
 
 
 public class FlameItem extends Item {
@@ -16,7 +15,6 @@ public class FlameItem extends Item {
         super(x, y, img);
         this.duration = DURATION;
     }
-
     @Override
     public void update() {
         img = Sprite.powerup_flames.getFxImage();

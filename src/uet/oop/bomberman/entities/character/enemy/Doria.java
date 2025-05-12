@@ -25,9 +25,9 @@ public class Doria extends Enemy {
 
         if (hurt) {
             img = Sprite.movingSprite(Sprite.kondoria_dead, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animate, 20).getFxImage();
-            return;
+            return; 
         }
-
+        
         switch (direction) {
             case D:
                 if (checkBrick(x, y + STEP + Sprite.SCALED_SIZE - 1) && (checkBrick(x + Sprite.SCALED_SIZE - 1, y + STEP + Sprite.SCALED_SIZE - 1))) {
@@ -88,22 +88,22 @@ public class Doria extends Enemy {
                 boolean canMove = false;
                 switch (dir) {
                     case D:
-                        canMove = checkBrick(x, y + Sprite.SCALED_SIZE)
+                        canMove = checkBrick(x, y + Sprite.SCALED_SIZE) 
                                 && checkBrick(x + Sprite.SCALED_SIZE - 1, y + Sprite.SCALED_SIZE)
                                 && checkBrick(x + Sprite.SCALED_SIZE / 2, y + Sprite.SCALED_SIZE);
                         break;
                     case U:
-                        canMove = checkBrick(x, y - 1)
+                        canMove = checkBrick(x, y - 1) 
                                 && checkBrick(x + Sprite.SCALED_SIZE - 1, y - 1)
                                 && checkBrick(x + Sprite.SCALED_SIZE / 2, y - 1);
                         break;
                     case L:
-                        canMove = checkBrick(x - 1, y)
+                        canMove = checkBrick(x - 1, y) 
                                 && checkBrick(x - 1, y + Sprite.SCALED_SIZE - 1)
                                 && checkBrick(x - 1, y + Sprite.SCALED_SIZE / 2);
                         break;
                     case R:
-                        canMove = checkBrick(x + Sprite.SCALED_SIZE, y)
+                        canMove = checkBrick(x + Sprite.SCALED_SIZE, y) 
                                 && checkBrick(x + Sprite.SCALED_SIZE, y + Sprite.SCALED_SIZE - 1)
                                 && checkBrick(x + Sprite.SCALED_SIZE, y + Sprite.SCALED_SIZE / 2);
                         break;

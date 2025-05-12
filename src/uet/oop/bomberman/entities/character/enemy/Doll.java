@@ -1,9 +1,7 @@
 package uet.oop.bomberman.entities.character.enemy;
 
 import javafx.scene.image.Image;
-
 import static uet.oop.bomberman.BombermanGame.table;
-
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Doll extends Enemy {
@@ -17,14 +15,14 @@ public class Doll extends Enemy {
     private void dollMoving() {
         int px = getTileX();
         int py = getTileY();
-
+        
         table[px][py] = null;
         sprite = Sprite.doll_right1;
 
         if (hurt) {
             img = Sprite.movingSprite(Sprite.doll_dead, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animate, 20).getFxImage();
             // Sound.playSoundEffect("cut_ra_ngoai");
-            return;
+            return; 
         }
 
         switch (direction) {
@@ -75,7 +73,7 @@ public class Doll extends Enemy {
         table[newPx][newPy] = this;
     }
 
-
+    
     public void setEnemyDie() {
         this.life = 0;
         gotHurt(Sprite.oneal_dead);

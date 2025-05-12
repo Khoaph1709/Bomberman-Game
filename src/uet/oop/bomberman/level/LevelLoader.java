@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import uet.oop.bomberman.BombermanGame;
-
 import static uet.oop.bomberman.BombermanGame.hiddenTable;
 import static uet.oop.bomberman.BombermanGame.table;
-
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloom;
@@ -25,11 +23,12 @@ import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 
+
 public class LevelLoader {
     private int width;
     private int height;
-    private final List<Entity> entities;
-    private final List<Entity> stillObjects;
+    private List<Entity> entities;
+    private List<Entity> stillObjects;
     private List<Entity> enemies;
     private List<Entity> flames;
 
@@ -44,7 +43,7 @@ public class LevelLoader {
     }
 
     public Bomber getBomber() {
-        return bomber;
+        return bomber; 
     }
 
     public List<Entity> getEntities() {
@@ -56,11 +55,11 @@ public class LevelLoader {
     }
 
     public List<Entity> getEnemies() {
-        return enemies;
+        return enemies; 
     }
 
     public List<Entity> getFlames() {
-        return flames;
+       return flames; 
     }
 
     public LevelLoader() {
@@ -109,7 +108,7 @@ public class LevelLoader {
                 break;
             case '*': // Gạch
                 Entity brick = new Brick(x, y, Sprite.brick.getFxImage());
-                stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
+                stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage())); 
                 entities.add(brick);
                 table[x][y] = brick;
                 break;
@@ -147,7 +146,7 @@ public class LevelLoader {
                 table[x][y] = minvo;
                 stillObjects.add(new Grass(x, y, Sprite.grass.getFxImage()));
                 break;
-            case '5':
+            case '5': 
                 Entity doria = new Doria(x, y, Sprite.kondoria_right1.getFxImage());
                 enemies.add(doria);
                 table[x][y] = doria;

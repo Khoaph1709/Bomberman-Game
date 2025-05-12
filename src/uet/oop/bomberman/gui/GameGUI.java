@@ -66,7 +66,7 @@ public class GameGUI {
         Font font = new Font("pixels", 20);
         textLife = createText(10, "LIFE: " + life, font);
         textScore = createText(100, "SCORE: " + score, font);
-        textLevel = createText(canvas.getWidth() / 2 - 40, "LEVEL: " + level, font);
+        textLevel = createText(canvas.getWidth()/2 - 40, "LEVEL: " + level, font);
 
         root.getChildren().addAll(textLife, textScore, textLevel);
     }
