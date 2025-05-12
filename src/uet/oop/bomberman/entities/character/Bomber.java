@@ -10,6 +10,8 @@ import static uet.oop.bomberman.BombermanGame.table;
 import uet.oop.bomberman.algorithm.FindPathAI;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.bomb.Flame;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.FlamePassItem;
@@ -180,7 +182,31 @@ public class Bomber extends Entity {
             hurt_time++;
             return;
         }
+
         invincibleTimer = Math.max(0, invincibleTimer - 1);
+
+        if (invincibleTimer == 0) {
+            for (Entity entity : BombermanGame.enemies) {
+                if (entity instanceof Enemy) {
+                    if (checkCollisionEntity(entity)) {
+                        blood--;
+                        hurt = true;
+                        break;
+                    }
+                }
+            }
+
+            for (Entity entity : BombermanGame.entities) {
+                if (entity instanceof Flame && !flamePass) {
+                    if (checkCollisionEntity(entity)) {
+                        blood--;
+                        hurt = true;
+                        break;
+                    }
+                }
+            }
+        }
+
         moving = false;
         bomberMoving();
         getItem();
@@ -188,7 +214,28 @@ public class Bomber extends Entity {
         if (keyListener.isKeyPressed(KeyCode.SPACE)) {
             placeBomb();
         }
+        if (blood <= 0) {
+            BombermanGame.gameState = BombermanGame.STATE.END;
+        }
     }
+
+    private boolean checkCollisionEntity(Entity entity) {
+        int bomberLeft = x;
+        int bomberRight = x + Sprite.SCALED_SIZE;
+        int bomberTop = y;
+        int bomberBottom = y + Sprite.SCALED_SIZE;
+
+        int entityLeft = entity.getX();
+        int entityRight = entity.getX() + Sprite.SCALED_SIZE;
+        int entityTop = entity.getY();
+        int entityBottom = entity.getY() + Sprite.SCALED_SIZE;
+
+        return bomberRight >= entityLeft
+                && bomberLeft <= entityRight
+                && bomberBottom >= entityTop
+                && bomberTop <= entityBottom;
+    }
+
 
     public int getPlayerX() {
         if (AI) {
