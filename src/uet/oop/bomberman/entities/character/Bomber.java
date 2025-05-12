@@ -392,7 +392,7 @@ public class Bomber extends Entity {
             } else {
                 if (keyListener.isKeyPressed(KeyCode.D) || AI || keyListener.isKeyPressed(KeyCode.RIGHT)) {
                     direction = Direction.R;
-                    if (checkBrick(x + STEP + Sprite.SCALED_SIZE - 3, y) && checkBrick(x + STEP + Sprite.SCALED_SIZE - 12, y + Sprite.SCALED_SIZE - 3)) {
+                    if (checkBrick(x + STEP + Sprite.SCALED_SIZE - 12,y + 3) && checkBrick(x + STEP + Sprite.SCALED_SIZE - 12, y + Sprite.SCALED_SIZE - 3)) {
                         x += STEP;
                         moving = true;
                     }
