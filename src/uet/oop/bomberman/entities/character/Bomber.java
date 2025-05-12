@@ -110,6 +110,14 @@ public class Bomber extends Entity {
         }
         img = sprite.getFxImage();
     }
+
+    public void resetStats() {
+        STEP = Sprite.STEP;
+        bombQuantity = 1;
+        flameLength = 1;
+        flamePass = false;
+        wallPass = false;
+    }
     
     // Getters and setters for properties
     public int getSpeed() {
