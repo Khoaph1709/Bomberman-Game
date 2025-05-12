@@ -42,8 +42,6 @@ public class Bomber extends Entity {
     private int invincibleTimer = 0;
     private int bombSize = 1;
 
-
-
     public Bomber(int x, int y, Image img, KeyListener keyListener) {
         super(x, y, img);
         this.keyListener = keyListener;

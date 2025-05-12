@@ -24,6 +24,75 @@ public abstract class Enemy extends Entity {
         super(x, y, img);
     }
 
+    protected void findDirection() {
+        if (animate > MAX_ANIMATE) {
+            animate = 0;
+        }
+        if (animate % 70 == 0) {
+            List<Direction> validDirections = new ArrayList<>();
+
+            for (Direction dir : Direction.values()) {
+                boolean canMove = false;
+                switch (dir) {
+                    case D:
+                        canMove = checkWall(x, y + Sprite.SCALED_SIZE) 
+                                && checkWall(x + Sprite.SCALED_SIZE - 1, y + Sprite.SCALED_SIZE)
+                                && checkWall(x + Sprite.SCALED_SIZE / 2, y + Sprite.SCALED_SIZE);
+                        break;
+                    case U:
+                        canMove = checkWall(x, y - 1) 
+                                && checkWall(x + Sprite.SCALED_SIZE - 1, y - 1)
+                                && checkWall(x + Sprite.SCALED_SIZE / 2, y - 1);
+                        break;
+                    case L:
+                        canMove = checkWall(x - 1, y) 
+                                && checkWall(x - 1, y + Sprite.SCALED_SIZE - 1)
+                                && checkWall(x - 1, y + Sprite.SCALED_SIZE / 2);
+                        break;
+                    case R:
+                        canMove = checkWall(x + Sprite.SCALED_SIZE, y) 
+                                && checkWall(x + Sprite.SCALED_SIZE, y + Sprite.SCALED_SIZE - 1)
+                                && checkWall(x + Sprite.SCALED_SIZE, y + Sprite.SCALED_SIZE / 2);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (canMove) {
+                    validDirections.add(dir);
+                }
+            }
+
+            if (!validDirections.isEmpty()) {
+                Random random = new Random();
+                
+                // Lấy vị trí Bomber
+                int bomberX = BombermanGame.getBomber().getTileX();
+                int bomberY = BombermanGame.getBomber().getTileY();
+                int enemyX = getTileX();
+                int enemyY = getTileY();
+                
+                // Tính toán hướng ưu tiên
+                Direction preferredDirection;
+                int dx = bomberX - enemyX;
+                int dy = bomberY - enemyY;
+                
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    preferredDirection = (dx > 0) ? Direction.R : Direction.L;
+                } else {
+                    preferredDirection = (dy > 0) ? Direction.D : Direction.U;
+                }
+                
+                // Xác suất 70% đuổi theo Bomber nếu hướng hợp lệ
+                if (validDirections.contains(preferredDirection) && random.nextDouble() < 0.7) {
+                    direction = preferredDirection;
+                } else {
+                    direction = validDirections.get(random.nextInt(validDirections.size()));
+                }
+            }
+        }
+    }
+
     protected void gotHurt(Sprite sprite) {
         hurt_time++;
         if (hurt_time == 1) {
@@ -53,5 +122,22 @@ public abstract class Enemy extends Entity {
         //         BombermanGame.table[x][y] = null;
         //     });
         // }
+    }
+
+    public static boolean checkWall(int x, int y) {
+        if (x < 0 || y < 0 || x > Sprite.SCALED_SIZE * BombermanGame.WIDTH || y > Sprite.SCALED_SIZE * BombermanGame.HEIGHT)
+            return false;
+
+        x /= Sprite.SCALED_SIZE;
+        y /= Sprite.SCALED_SIZE;
+        Entity entity = getEntity(x, y);
+        return !(entity instanceof Wall) && !(entity instanceof Brick) && !(entity instanceof Bomb) && !(entity instanceof Doria);
+    }
+    
+
+    protected void checkCollideWithBomber() {
+        if (BombermanGame.getBomber().getPlayerX() == getTileX() && BombermanGame.getBomber().getPlayerY() == getTileY() && !BombermanGame.getBomber().isProtectded()) {
+            BombermanGame.getBomber().setHurt();
+        }
     }
 }

@@ -26,6 +26,14 @@ public class Bomb extends Entity {
     private boolean exploded = false;
     private Entity portalPos = null;
 
+    public int getFlameLength() {
+        return size;
+    }
+
+    public int getTimeToExplode() {
+        return timeToExplode;
+    }
+
     public Bomb(int x, int y, Image img, List<Entity> entities, int size) {
         super(x, y, img);
         this.size = size;

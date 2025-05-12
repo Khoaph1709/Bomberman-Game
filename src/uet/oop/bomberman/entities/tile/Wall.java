@@ -14,4 +14,3 @@ public class Wall extends Tile {
         table[getTileX()][getTileY()] = this; 
     }
 }
-
