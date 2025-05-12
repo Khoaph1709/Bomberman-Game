@@ -37,8 +37,7 @@ public class Bomber extends Entity {
     public int bombQuantity = 1;
     private boolean flamePass = false;
     private boolean wallPass = false;
-    private int flameLength = 1; 
-
+    private int flameLength = 1;
     private int invincibleTimer = 0;
     private int bombSize = 1;
 
@@ -334,14 +333,14 @@ public class Bomber extends Entity {
             } else {
                 if (keyListener.isKeyPressed(KeyCode.D) || AI || keyListener.isKeyPressed(KeyCode.RIGHT)) {
                     direction = Direction.R;
-                    if (checkBrick(x - STEP, y + 3) && checkBrick(x - STEP, y + Sprite.SCALED_SIZE - 3)) {
+                    if (checkBrick(x + STEP + Sprite.SCALED_SIZE - 3, y) && checkBrick(x + STEP + Sprite.SCALED_SIZE - 12, y + Sprite.SCALED_SIZE - 3)) {
                         x += STEP;
                         moving = true;
                     }
                 }
                 if (keyListener.isKeyPressed(KeyCode.A) || AI || keyListener.isKeyPressed(KeyCode.LEFT)) {
                     direction = Direction.L;
-                    if (checkBrick(x - STEP + Sprite.SCALED_SIZE , y + 3) && checkBrick(x - STEP, y + Sprite.SCALED_SIZE - 3)) {
+                    if (checkBrick(x - STEP, y + 3) && checkBrick(x - STEP, y + Sprite.SCALED_SIZE - 3)) {
                         x -= STEP;
                         moving = true;
                     }
@@ -351,7 +350,7 @@ public class Bomber extends Entity {
                     if (checkBrick(x, y - STEP + 3) && checkBrick(x + Sprite.SCALED_SIZE - 12, y - STEP + 3)) {
                         y -= STEP;
                         moving = true; 
-                    } 
+                    }
                 }
                 if (keyListener.isKeyPressed(KeyCode.S) || AI || keyListener.isKeyPressed(KeyCode.DOWN)) {
                     direction = Direction.D;
