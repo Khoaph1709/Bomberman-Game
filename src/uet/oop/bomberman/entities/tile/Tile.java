@@ -14,12 +14,14 @@ public class Tile extends Entity {
     @Override
     public int getTileY() {
         return y / Sprite.SCALED_SIZE;
-    }  
+    }
 
     public Tile(int x, int y, Image img) {
-        super(x, y, img); 
+        super(x, y, img);
     }
 
     @Override
-    public void update() {};
+    public void update() {
+    }
+
 }

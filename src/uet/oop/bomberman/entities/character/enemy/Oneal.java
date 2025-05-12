@@ -3,7 +3,9 @@ package uet.oop.bomberman.entities.character.enemy;
 import java.util.Random;
 
 import javafx.scene.image.Image;
+
 import static uet.oop.bomberman.BombermanGame.table;
+
 import uet.oop.bomberman.algorithm.FindPath;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -26,12 +28,12 @@ public class Oneal extends Enemy {
             animate = 0;
         }
         if (x % Sprite.SCALED_SIZE == 0 && y % Sprite.SCALED_SIZE == 0) {
-           Direction nDirection = FindPath.bfs(getTileX(), getTileY());
-           if (nDirection != null) {
+            Direction nDirection = FindPath.bfs(getTileX(), getTileY());
+            if (nDirection != null) {
                 canReach = true;
                 direction = nDirection;
-           } 
-           moving = false;
+            }
+            moving = false;
         }
         if (animate % 70 == 0 && x % Sprite.SCALED_SIZE == 0 && y % Sprite.SCALED_SIZE == 0 && !canReach) {
             direction = Direction.values()[new Random().nextInt(Direction.values().length)];
@@ -44,7 +46,7 @@ public class Oneal extends Enemy {
         int py = getTileY();
         table[px][py] = null;
         sprite = Sprite.oneal_right1;
-        
+
         if (hurt) {
             img = Sprite.movingSprite(Sprite.oneal_dead, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animate, 20).getFxImage();
             return;
@@ -94,12 +96,12 @@ public class Oneal extends Enemy {
     }
 
     @Override
-    public void update() { 
+    public void update() {
         if (hurt) {
             gotHurt(Sprite.oneal_dead);
             return;
         }
-        
+
         // Randomly change speed every 100 frames
         if (animate % 100 == 0) {
             currentSpeed = MIN_SPEED + new Random().nextInt(MAX_SPEED - MIN_SPEED + 1);

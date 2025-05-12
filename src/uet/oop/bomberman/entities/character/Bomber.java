@@ -4,9 +4,11 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import uet.oop.bomberman.BombermanGame;
+
 import static uet.oop.bomberman.BombermanGame.enemies;
 import static uet.oop.bomberman.BombermanGame.entities;
 import static uet.oop.bomberman.BombermanGame.table;
+
 import uet.oop.bomberman.algorithm.FindPathAI;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.Bomb;
@@ -26,11 +28,11 @@ import uet.oop.bomberman.sound.Sound;
 
 public class Bomber extends Entity {
     public boolean AI = false;
-    
+
     public static int bomberLife;
     private int STEP = Sprite.STEP * speed;
     private int blood = 2;
-    
+
     // Movement related variables
     private KeyListener keyListener;
     private boolean moving = false;
@@ -65,20 +67,18 @@ public class Bomber extends Entity {
             Sound.placeBomb.play();
         }
     }
-    
+
 
     private void chooseSprite() {
         animate += Sprite.STEP / 2;
         if (animate > 7500) {
             animate = 0;
-        }
-        else if (died) {
+        } else if (died) {
             img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, animate, 10).getFxImage();
             img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, animate, 10).getFxImage();
             entities.remove(this);
             return;
-        }
-        else if (hurt) {
+        } else if (hurt) {
             img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, animate, 10).getFxImage();
             return;
         }
@@ -118,20 +118,20 @@ public class Bomber extends Entity {
         flamePass = false;
         wallPass = false;
     }
-    
+
     // Getters and setters for properties
     public int getSpeed() {
         return speed;
     }
-    
+
     public int getFlameLength() {
         return flameLength;
     }
 
     public int getBlood() {
-        return blood;   
+        return blood;
     }
-    
+
     public Bomber(int x, int y, Image img) {
         super(x, y, img);
     }
@@ -252,18 +252,18 @@ public class Bomber extends Entity {
 
     public int getPlayerX() {
         if (AI) {
-            return (x + (1 * Sprite.SCALED_SIZE) / (2 * 1)) / Sprite.SCALED_SIZE;
+            return (x + (Sprite.SCALED_SIZE) / (2)) / Sprite.SCALED_SIZE;
         } else {
             return (x + (75 * Sprite.SCALED_SIZE) / (2 * 100)) / Sprite.SCALED_SIZE;
-         }
+        }
     }
 
     public int getPlayerY() {
         if (AI) {
-            return (y + (1 * Sprite.SCALED_SIZE) / (2 * 1)) / Sprite.SCALED_SIZE;
+            return (y + (Sprite.SCALED_SIZE) / (2)) / Sprite.SCALED_SIZE;
         } else {
             return (y + Sprite.SCALED_SIZE / 2) / Sprite.SCALED_SIZE;
-         }
+        }
     }
 
     private void AIDirection() {
@@ -294,10 +294,10 @@ public class Bomber extends Entity {
         sprite = Sprite.player_down;
         // Clear current position
         Entity current = table[px][py];
-        table[px][py] = null;        
+        table[px][py] = null;
 
         // Calculate next position based on input
-        
+
         if (AI) {
             AIDirection();
             if (!wallPass) {
@@ -326,8 +326,8 @@ public class Bomber extends Entity {
                     direction = Direction.D;
                     if (checkWall(x, y + STEP + Sprite.SCALED_SIZE - 1) && checkWall(x + Sprite.SCALED_SIZE - 1, y + STEP + Sprite.SCALED_SIZE - 1)) {
                         y += STEP;
-                        moving = true;     
-                    } 
+                        moving = true;
+                    }
                 }
             } else {
                 if (keyListener.isKeyPressed(KeyCode.D) || (AI && direction == Direction.R) || keyListener.isKeyPressed(KeyCode.RIGHT)) {
@@ -341,22 +341,22 @@ public class Bomber extends Entity {
                     direction = Direction.L;
                     if (checkBrick(x - STEP, y) && checkBrick(x - STEP, y + Sprite.SCALED_SIZE - 1)) {
                         x -= STEP;
-                        moving = true; 
-                    } 
+                        moving = true;
+                    }
                 }
                 if (keyListener.isKeyPressed(KeyCode.W) || (AI && direction == Direction.U) || keyListener.isKeyPressed(KeyCode.UP)) {
                     direction = Direction.U;
                     if (checkBrick(x, y - STEP) && checkBrick(x + Sprite.SCALED_SIZE - 1, y - STEP)) {
                         y -= STEP;
-                        moving = true;  
-                    } 
+                        moving = true;
+                    }
                 }
                 if (keyListener.isKeyPressed(KeyCode.S) || (AI && direction == Direction.D) || keyListener.isKeyPressed(KeyCode.DOWN)) {
                     direction = Direction.D;
                     if (checkBrick(x, y + STEP + Sprite.SCALED_SIZE - 1) && checkBrick(x + Sprite.SCALED_SIZE - 1, y + STEP + Sprite.SCALED_SIZE - 1)) {
                         y += STEP;
                         moving = true;
-                    } 
+                    }
                 }
             }
         } else if (!AI) {
@@ -386,13 +386,13 @@ public class Bomber extends Entity {
                     direction = Direction.D;
                     if (checkWall(x, y + STEP + Sprite.SCALED_SIZE - 3) && checkWall(x + Sprite.SCALED_SIZE - 12, y + STEP + Sprite.SCALED_SIZE - 3)) {
                         y += STEP;
-                        moving = true; 
-                    } 
+                        moving = true;
+                    }
                 }
             } else {
                 if (keyListener.isKeyPressed(KeyCode.D) || AI || keyListener.isKeyPressed(KeyCode.RIGHT)) {
                     direction = Direction.R;
-                    if (checkBrick(x + STEP + Sprite.SCALED_SIZE - 3, y) && checkBrick(x + STEP + Sprite.SCALED_SIZE - 12, y + Sprite.SCALED_SIZE - 3)) {
+                    if (checkBrick(x + STEP + Sprite.SCALED_SIZE - 12, y + 3) && checkBrick(x + STEP + Sprite.SCALED_SIZE - 12, y + Sprite.SCALED_SIZE - 3)) {
                         x += STEP;
                         moving = true;
                     }
@@ -408,15 +408,15 @@ public class Bomber extends Entity {
                     direction = Direction.U;
                     if (checkBrick(x, y - STEP + 3) && checkBrick(x + Sprite.SCALED_SIZE - 12, y - STEP + 3)) {
                         y -= STEP;
-                        moving = true; 
+                        moving = true;
                     }
                 }
                 if (keyListener.isKeyPressed(KeyCode.S) || AI || keyListener.isKeyPressed(KeyCode.DOWN)) {
                     direction = Direction.D;
                     if (checkBrick(x, y + STEP + Sprite.SCALED_SIZE - 3) && checkBrick(x + Sprite.SCALED_SIZE - 12, y + STEP + Sprite.SCALED_SIZE - 3)) {
                         y += STEP;
-                        moving = true; 
-                    } 
+                        moving = true;
+                    }
                 }
             }
         }
@@ -435,10 +435,10 @@ public class Bomber extends Entity {
     }
 
     public void setTileX(int tileX) {
-        this.x = tileX *  Sprite.SCALED_SIZE;
+        this.x = tileX * Sprite.SCALED_SIZE;
     }
 
     public void setTileY(int tileY) {
-        this.y = tileY *  Sprite.SCALED_SIZE;
+        this.y = tileY * Sprite.SCALED_SIZE;
     }
 }

@@ -3,7 +3,9 @@ package uet.oop.bomberman.entities.character.enemy;
 import java.util.Random;
 
 import javafx.scene.image.Image;
+
 import static uet.oop.bomberman.BombermanGame.table;
+
 import uet.oop.bomberman.algorithm.FindPath;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -18,6 +20,7 @@ public class Minvo extends Enemy {
 
     /**
      * Kiểm tra xem có thể di chuyển tới vị trí x, y hay không
+     *
      * @param x
      * @param y
      * @return true nếu có thể di chuyển tới vị trí x, y, ngược lại trả về false
@@ -33,7 +36,7 @@ public class Minvo extends Enemy {
             if (nDirection != null) {
                 moving = true;
                 canReach = true;
-                direction = nDirection; 
+                direction = nDirection;
             }
             moving = false;
         }
@@ -78,9 +81,9 @@ public class Minvo extends Enemy {
             case L:
                 if (checkWall(x - STEP, y) && checkWall(x - STEP, y + Sprite.SCALED_SIZE - 1)) {
                     x -= STEP;
-                    moving = true; 
+                    moving = true;
                     if (moving) {
-                        sprite = Sprite.movingSprite(Sprite.minvo_left1, Sprite.minvo_left2, Sprite.minvo_left3, animate, 20); 
+                        sprite = Sprite.movingSprite(Sprite.minvo_left1, Sprite.minvo_left2, Sprite.minvo_left3, animate, 20);
                     }
                 }
                 break;
@@ -89,8 +92,8 @@ public class Minvo extends Enemy {
                     x += STEP;
                     moving = true;
                     if (moving) {
-                        sprite = Sprite.movingSprite(Sprite.minvo_right1, Sprite.minvo_right2, Sprite.minvo_right3, animate, 20); 
-                    } 
+                        sprite = Sprite.movingSprite(Sprite.minvo_right1, Sprite.minvo_right2, Sprite.minvo_right3, animate, 20);
+                    }
 
                 }
                 break;

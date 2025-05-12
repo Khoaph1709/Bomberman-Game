@@ -3,8 +3,10 @@ package uet.oop.bomberman.entities.tile;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
+
 import static uet.oop.bomberman.BombermanGame.entities;
 import static uet.oop.bomberman.BombermanGame.table;
+
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.sound.Sound;
@@ -40,7 +42,7 @@ public class Brick extends Tile {
     public void setExploaded() {
         this.exploded = true;
     }
-    
+
 
     @Override
     public void update() {

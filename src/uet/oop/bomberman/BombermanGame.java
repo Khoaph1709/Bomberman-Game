@@ -35,7 +35,7 @@ public class BombermanGame extends Application {
     public static Bomber getBomber() {
         return gameBomber;
     }
-    
+
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
     private static final int INIT_LEVEL = 0;
@@ -52,15 +52,15 @@ public class BombermanGame extends Application {
     public static boolean isEnd = false;
     Group root = null;
     private Canvas canvas;
-    private Text textLife = null;
-    private Text textLevel = null;
+    private final Text textLife = null;
+    private final Text textLevel = null;
     public static int MAXSCORE = 0;
     private boolean newGame = true;
     private AnimationTimer gameTimer;
     private AnimationTimer mainTimer;
 
     public static Sound music;
-    
+
 
     private final Effect shadow = new DropShadow();
 
@@ -120,13 +120,13 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
-        enemies.forEach(Entity::update);    
+        enemies.forEach(Entity::update);
     }
 
     public void render(Stage stage) {
         switch (gameState) {
             case SINGLEPLAYER:
-                Bomber bomber = new  Bomber(1, 1, Sprite.player_down.getFxImage(), null);
+                Bomber bomber = new Bomber(1, 1, Sprite.player_down.getFxImage(), null);
                 for (Entity entity : entities) {
                     if (entity instanceof Bomber) {
                         bomber = (Bomber) entity;
@@ -168,7 +168,7 @@ public class BombermanGame extends Application {
                 break;
             default:
                 throw new IllegalStateException("Invalid game state");
-        } 
+        }
     }
 
     public void single(Stage stage) {
@@ -193,7 +193,7 @@ public class BombermanGame extends Application {
             public void handle(long now) {
                 if (gameState == STATE.MENU || gameState == STATE.END) {
                     newGame = true;
-                    stop(); 
+                    stop();
                     return;
                 } else {
                     update();
@@ -240,7 +240,7 @@ public class BombermanGame extends Application {
     }
 
     public void end(Stage stage) {
-        if (music!= null) {
+        if (music != null) {
             music.stop();
         }
         InputStream stream = null;
@@ -410,7 +410,7 @@ public class BombermanGame extends Application {
         exitButton.setOnAction(event -> {
             System.exit(0);
         });
-        
+
         try {
             stream = new FileInputStream("res/button_menu/menu.jpeg");
         } catch (Exception e) {
@@ -438,7 +438,7 @@ public class BombermanGame extends Application {
         PAUSE,
         END,
         NEXT_LEVEL,
-        EXIT;
+        EXIT
     }
 
     public static void main(String[] args) {
