@@ -24,6 +24,7 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.gui.GameGUI;
+import uet.oop.bomberman.input.KeyListener;
 import uet.oop.bomberman.level.LevelLoader;
 import uet.oop.bomberman.sound.Sound;
 
@@ -134,11 +135,11 @@ public class BombermanGame extends Application {
                     level++;
                     gameGUI = new GameGUI(); //TODO: FIX BUG
                     gameGUI.setupStage(stage, WIDTH, HEIGHT);
+                    canvas = gameGUI.getCanvas();
                     gc = gameGUI.getGraphicsContext();
                     stage.show();
                     createMap();
                 } else if (!isEnd) {
-                    //TODO: end game
                     end(stage);
                     isEnd = true;
                 }
@@ -156,7 +157,7 @@ public class BombermanGame extends Application {
     }
 
     public void single(Stage stage) {
-        if (music!= null) {
+        if (music != null) {
             music.stop();
         }
         gameGUI = new GameGUI();

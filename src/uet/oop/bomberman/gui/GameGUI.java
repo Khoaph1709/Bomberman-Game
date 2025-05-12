@@ -34,11 +34,14 @@ public class GameGUI {
         canvas = new Canvas(Sprite.SCALED_SIZE * width, Sprite.SCALED_SIZE * height + 30);
         gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
-        Scene scene = new Scene(root, Color.BLACK);
-        KeyListener keyListener = new KeyListener(scene);
+        if (stage.getScene() == null) {
+            Scene scene = new Scene(root, Color.BLACK);
+            stage.setScene(scene);
+        } else {
+            stage.getScene().setRoot(root);
+        }
+        KeyListener keyListener = new KeyListener(stage.getScene());
         BombermanGame.getBomber().setKeyListener(keyListener);
-        stage.setScene(scene);
-        
     }
 
     public GraphicsContext getGraphicsContext() {
@@ -109,5 +112,9 @@ public class GameGUI {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
     }
 }

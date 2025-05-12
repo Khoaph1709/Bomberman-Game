@@ -239,7 +239,6 @@ public class Bomber extends Entity {
         // Calculate next position based on input
         
         if (AI) {
-            // TODO: Implement AI logic here
             AIDirection();
             if (!wallPass) {
                 if (keyListener.isKeyPressed(KeyCode.D) || (AI && direction == Direction.R) || keyListener.isKeyPressed(KeyCode.RIGHT)) {
@@ -374,5 +373,4 @@ public class Bomber extends Entity {
     public boolean isProtectded() {
         return invincibleTimer > 0;
     }
-
 }
