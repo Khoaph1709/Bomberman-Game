@@ -128,7 +128,7 @@ public class BombermanGame extends Application {
                 }
                 gameBomber = bomber;
                 gameGUI.renderGame(stillObjects, entities, enemies, bomber);
-                gameGUI.updateGameStats(playerLives, ((MAXSCORE - enemies.size()) * 100), level);
+                gameGUI.updateGameStats(gameBomber.getBlood(), ((MAXSCORE - enemies.size()) * 100), level);
                 break;
             case PAUSE:
                 break;
