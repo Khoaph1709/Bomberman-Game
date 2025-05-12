@@ -215,7 +215,10 @@ public class BombermanGame extends Application {
                 System.exit(0);
                 break;
             case END:
-                end(stage);
+                if (!isEnd) {
+                    end(stage);
+                    isEnd = true;
+                }
                 break;
             default:
                 throw new IllegalStateException("Invalid game state");
@@ -260,7 +263,6 @@ public class BombermanGame extends Application {
         button.setOnAction(event -> {
             if (gameState == STATE.NEXT_LEVEL) {
                 gameState = STATE.SINGLEPLAYER;
-                newGame = true;
             } else if (gameState == STATE.END) {
                 resetGame();
                 gameState = STATE.MENU;
@@ -269,6 +271,7 @@ public class BombermanGame extends Application {
             }
             isEnd = false;
             stage.close();
+            mainTimer.start();
         });
         Group newRoot = new Group();
         try {
@@ -299,6 +302,7 @@ public class BombermanGame extends Application {
         MAXSCORE = 0;
         isEnd = false;
         level = INIT_LEVEL;
+        gameBomber.bombQuantity = 1;
     }
 
     public void menu(Stage stage) {
