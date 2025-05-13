@@ -9,11 +9,9 @@ import uet.oop.bomberman.graphics.Sprite;
 
 
 public class FlameItem extends Item {
-    private static final int DURATION = 900; // 15 giây
 
     public FlameItem(int x, int y, Image img) {
         super(x, y, img);
-        this.duration = DURATION;
     }
     @Override
     public void update() {
