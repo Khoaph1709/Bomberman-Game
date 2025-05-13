@@ -278,20 +278,13 @@ public class Bomber extends Entity {
     }
 
     private boolean checkCollisionEntity(Entity entity) {
-        int bomberLeft = x;
-        int bomberRight = x + Sprite.SCALED_SIZE;
-        int bomberTop = y;
-        int bomberBottom = y + Sprite.SCALED_SIZE;
+        int bomberTileX = getPlayerX();
+        int bomberTileY = getPlayerY();
 
-        int entityLeft = entity.getX();
-        int entityRight = entity.getX() + Sprite.SCALED_SIZE;
-        int entityTop = entity.getY();
-        int entityBottom = entity.getY() + Sprite.SCALED_SIZE;
+        int entityTileX = entity.getTileX();
+        int entityTileY = entity.getTileY();
 
-        return bomberRight >= entityLeft
-                && bomberLeft <= entityRight
-                && bomberBottom >= entityTop
-                && bomberTop <= entityBottom;
+        return (bomberTileX == entityTileX && bomberTileY == entityTileY);
     }
 
     private void revertItemEffect(Item item) {
