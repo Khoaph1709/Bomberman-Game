@@ -483,6 +483,14 @@ public class Bomber extends Entity {
         table[px][py] = current;
     }
 
+    @Override
+    public void setHurt() {
+        if (!hurt) {
+            blood--;
+        }
+        hurt = true;
+    }
+
     public boolean isFlamePass() {
         return flamePass;
     }

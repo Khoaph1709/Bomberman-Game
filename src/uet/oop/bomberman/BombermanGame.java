@@ -301,11 +301,11 @@ public class BombermanGame extends Application {
         imageView.setImage(image);
         imageView.setX(0);
         imageView.setY(0);
-        imageView.setFitWidth(30 * Sprite.MENU_SIZE);
-        imageView.setFitHeight(15 * Sprite.MENU_SIZE);
+        imageView.setFitWidth(WIDTH * Sprite.MENU_SIZE);
+        imageView.setFitHeight(HEIGHT * Sprite.MENU_SIZE + 30);
         newRoot.getChildren().add(imageView);
         newRoot.getChildren().add(button);
-        Scene scene = new Scene(newRoot, Sprite.MENU_SIZE * 30, Sprite.MENU_SIZE * 15, Color.BLACK);
+        Scene scene = new Scene(newRoot, Sprite.MENU_SIZE * WIDTH, Sprite.MENU_SIZE * HEIGHT + 30, Color.BLACK);
         stage.setTitle("BOMBERMAN");
         stage.setScene(scene);
         stage.show();

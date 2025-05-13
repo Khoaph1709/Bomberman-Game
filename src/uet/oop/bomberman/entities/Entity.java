@@ -29,9 +29,6 @@ public abstract class Entity {
     protected boolean hurt = false;
     protected int hurt_time = 0;
 
-    protected int hurtAnimationFramse = 0;
-    protected static final int HURT_ANIMATION_DURATION = 20;
-
     protected int speed = 1; // pixel / frame
 
     protected Direction direction = Direction.R;
