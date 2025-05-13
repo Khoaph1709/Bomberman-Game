@@ -96,7 +96,7 @@ public abstract class Enemy extends Entity {
     protected void gotHurt(Sprite sprite) {
         hurt_time++;
         if (hurt_time == 1) {
-            Sound.died.play();
+            Sound.mobDied.play();
         }
         img = sprite.getFxImage();
         if (hurt_time == 20) {

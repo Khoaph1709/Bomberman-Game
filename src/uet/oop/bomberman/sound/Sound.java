@@ -38,14 +38,15 @@ public class Sound {
         clip.stop();
     }
 
-    public static Sound mainBgm = new Sound("main_bgm.wav");
     public static Sound titleScreen = new Sound("title_screen.wav");
     public static Sound collectItem = new Sound("collect_item.wav");
     public static Sound powerupGet = new Sound("powerup_get.wav");
     public static Sound placeBomb = new Sound("place_bomb.wav");
-    public static Sound died = new Sound("died.wav");
+    public static Sound died = new Sound("hurt.wav");
+    public static Sound mobDied = new Sound("mob_hurt.wav");
     public static Sound move = new Sound("move.wav");
     public static Sound explosion = new Sound("explosion.wav");
     public static Sound win = new Sound("stage_clear.wav");
     public static Sound ending = new Sound("miss.wav");
+    public static Sound youWin = new Sound("stage_clear.wav");
 }
