@@ -4,3 +4,4 @@
 *.iml
 /.vscode
 /.run
+.run/BombermanGame.run.xml
