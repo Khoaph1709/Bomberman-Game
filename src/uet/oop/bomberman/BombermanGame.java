@@ -37,7 +37,7 @@ public class BombermanGame extends Application {
     
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    private static final int INIT_LEVEL = 1;
+    private static final int INIT_LEVEL = 0;
     private static final int MAX_LEVEL = 5;
     public static long FPS_GAME = 1000 / 60;
     public static int level = INIT_LEVEL;
@@ -103,9 +103,6 @@ public class BombermanGame extends Application {
             stillObjects = levelLoader.getStillObjects();
             entities = levelLoader.getEntities();
             enemies = levelLoader.getEnemies();
-            System.out.println("Loaded " + stillObjects.size() + " static objects");
-            System.out.println("Loaded " + entities.size() + " entities");
-            System.out.println("Loaded " + enemies.size() + " enemies");
 
             gameBomber.setTileX(1);
             gameBomber.setTileY(1);
@@ -330,7 +327,6 @@ public class BombermanGame extends Application {
     }
 
     public void menu(Stage stage) {
-        // resetGame();
         if (music != null) {
             music.stop();
         }
@@ -418,11 +414,11 @@ public class BombermanGame extends Application {
         imageView.setImage(image);
         imageView.setX(0);
         imageView.setY(0);
-        imageView.setFitWidth(30 * Sprite.MENU_SIZE);
-        imageView.setFitHeight(15 * Sprite.MENU_SIZE);
+        imageView.setFitWidth(WIDTH * Sprite.MENU_SIZE);
+        imageView.setFitHeight(HEIGHT * Sprite.MENU_SIZE + 30);
         menuRoot.getChildren().add(imageView);
         menuRoot.getChildren().addAll(startButton, AIButton, exitButton);
-        Scene scene = new Scene(menuRoot, Sprite.MENU_SIZE * 30, Sprite.MENU_SIZE * 15, Color.BLACK);
+        Scene scene = new Scene(menuRoot, Sprite.MENU_SIZE * WIDTH, Sprite.MENU_SIZE * HEIGHT + 30, Color.BLACK);
         stage.setTitle("BOMBERMAN");
         stage.setScene(scene);
         stage.show();
@@ -440,6 +436,5 @@ public class BombermanGame extends Application {
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
-        System.out.println(BombermanGame.gameBomber.getTileX() + " " + BombermanGame.gameBomber.getTileY());
     }
 }

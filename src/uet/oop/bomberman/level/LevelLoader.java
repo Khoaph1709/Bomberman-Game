@@ -77,8 +77,8 @@ public class LevelLoader {
             Scanner scanner = new Scanner(file);
 
             int level = scanner.nextInt();
-            int height = scanner.nextInt();
-            int width = scanner.nextInt();
+            height = scanner.nextInt();
+            width = scanner.nextInt();
             scanner.nextLine();
 
             for (int i = 0; i < height; i++) {

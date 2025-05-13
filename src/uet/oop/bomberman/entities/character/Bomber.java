@@ -144,12 +144,21 @@ public class Bomber extends Entity {
         if (cooldownTimer > 0) {
             return;
         }
-        if (activeItem != null) {
-            return;
-        }
+
 
         int px = (x + (75 * Sprite.SCALED_SIZE) / (2 * 100)) / Sprite.SCALED_SIZE;
         int py = (y + Sprite.SCALED_SIZE / 2) / Sprite.SCALED_SIZE;
+
+        if (table[px][py] instanceof Portal) {
+            if (enemies.isEmpty()) {
+                BombermanGame.gameState = BombermanGame.STATE.NEXT_LEVEL;
+            }
+            return;
+        }
+
+        if (activeItem != null) {
+            return;
+        }
 
         if (table[px][py] instanceof FlameItem) {
             FlameItem flameItem = (FlameItem) table[px][py];
@@ -178,10 +187,6 @@ public class Bomber extends Entity {
             activeItem = bombItem;
             activeItemTime = bombItem.getDuration();
             cooldownTimer = 60;
-        } else if (table[px][py] instanceof Portal) {
-            if (enemies.isEmpty()) {
-                BombermanGame.gameState = BombermanGame.STATE.NEXT_LEVEL;
-            }
         } else if (table[px][py] instanceof FlamePassItem) {
             FlamePassItem flamePassItem = (FlamePassItem) table[px][py];
             if (!flamePassItem.isPickUp()) {
