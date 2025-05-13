@@ -19,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import uet.oop.bomberman.BombermanGame.STATE;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.character.Bomber;
@@ -38,7 +37,7 @@ public class BombermanGame extends Application {
     
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    private static final int INIT_LEVEL = 5;
+    private static final int INIT_LEVEL = 0;
     private static final int MAX_LEVEL = 5;
     public static long FPS_GAME = 1000 / 60;
     public static int level = INIT_LEVEL;
