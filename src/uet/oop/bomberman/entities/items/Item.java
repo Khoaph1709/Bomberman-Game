@@ -8,7 +8,7 @@ import uet.oop.bomberman.sound.Sound;
 public abstract class Item extends Entity {
     protected boolean pickUp = false;
     protected boolean active = false;
-    protected int duration = 600;
+    protected int duration = 60 * 10;
     protected int timeCounter = 0;
 
     public Item(int x, int y, Image img) {
