@@ -10,10 +10,13 @@ public abstract class Item extends Entity {
     protected boolean active = false;
     protected int duration = 600;
     protected int timeCounter = 0;
-    protected int soundCounter = 0;  
 
     public Item(int x, int y, Image img) {
         super(x, y, img);
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     public void pick() {
