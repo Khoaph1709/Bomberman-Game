@@ -30,7 +30,7 @@ public class Bomber extends Entity {
 
     public static int bomberLife;
     private int STEP = Sprite.STEP * speed;
-    private int blood = 2;
+    private int blood = 4;
 
     // Movement related variables
     private KeyListener keyListener;
@@ -254,12 +254,14 @@ public class Bomber extends Entity {
                 }
             }
 
-            for (Entity entity : BombermanGame.entities) {
-                if (entity instanceof Flame && !flamePass) {
-                    if (checkCollisionEntity(entity)) {
-                        blood--;
-                        hurt = true;
-                        break;
+            if (!hurt) {
+                for (Entity entity : BombermanGame.entities) {
+                    if (entity instanceof Flame && !flamePass) {
+                        if (checkCollisionEntity(entity)) {
+                            blood--;
+                            hurt = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -337,8 +339,6 @@ public class Bomber extends Entity {
     /**
      * Check if the player collides with a wall.
      *
-     * @param x the x-coordinate of the wall
-     * @param y the y-coordinate of the wall
      */
     private void bomberMoving() {
         int px = getTileX(); // Player's x-coordinate in grid

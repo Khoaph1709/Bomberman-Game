@@ -37,7 +37,7 @@ public class BombermanGame extends Application {
     
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    private static final int INIT_LEVEL = 0;
+    private static final int INIT_LEVEL = 1;
     private static final int MAX_LEVEL = 5;
     public static long FPS_GAME = 1000 / 60;
     public static int level = INIT_LEVEL;
